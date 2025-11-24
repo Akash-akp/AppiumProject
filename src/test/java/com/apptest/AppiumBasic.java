@@ -13,28 +13,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class AppiumBasic {
+public class AppiumBasic extends BaseTest{
     @Test
-    public void AppiumTest() throws MalformedURLException, URISyntaxException {
-        int port = 4724;
-        AppiumDriverLocalService service = new AppiumServiceBuilder()
-                .withAppiumJS(new File("C:\\Users\\AkashKumarParida\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
-                .withIPAddress("127.0.0.1")
-                .usingPort(port)
-                .build();
-
-        service.start();
-
-        UiAutomator2Options options = new UiAutomator2Options();
-        options.setDeviceName("emulator-5554");
-        String appPath = System.getProperty("user.dir") + "\\src\\test\\resources\\ApiDemos-debug.apk";
-        options.setApp(appPath);
-
-        AndroidDriver driver = new AndroidDriver(new URI("http://127.0.0.1:"+port).toURL(),options);
+    public void AppiumTest() {
         driver.findElement(AppiumBy.accessibilityId("Preference")).click();
-        driver.quit();
-        service.stop();
-
     }
 
 }
