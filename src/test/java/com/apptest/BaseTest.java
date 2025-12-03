@@ -5,8 +5,11 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -20,7 +23,7 @@ public class BaseTest {
     protected AppiumDriverLocalService service;
     protected AndroidDriver driver;
 
-    @BeforeClass
+    @BeforeMethod
     public void setup() throws URISyntaxException, MalformedURLException {
         service = new AppiumServiceBuilder()
                 .withAppiumJS(new File("C:\\Users\\AkashKumarParida\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
@@ -29,7 +32,8 @@ public class BaseTest {
                 .build();
         service.start();
         UiAutomator2Options options = new UiAutomator2Options();
-        options.setDeviceName("emulator-5554");
+        options.setDeviceName("Medium_Phone_API_36.1");
+        options.setUdid("emulator-5556");
         String appPath = System.getProperty("user.dir") + "\\src\\test\\resources\\ApiDemos-debug.apk";
         options.setApp(appPath);
 
@@ -38,12 +42,12 @@ public class BaseTest {
 
     public static void longPressAction(AndroidDriver driver,  WebElement element) {
         driver.executeScript("mobile: longClickGesture", new HashMap<String, Object>() {{
-            put("elementId", element.getAttribute("elementId"));
+            put("elementId", ((RemoteWebElement)element).getId());
             put("duration", 2000);
         }});
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown(){
         if(driver!=null){
             driver.quit();
