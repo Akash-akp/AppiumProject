@@ -4,6 +4,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -11,6 +12,8 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaseTest {
     private int port = 4724;
@@ -33,10 +36,20 @@ public class BaseTest {
         driver = new AndroidDriver(new URI("http://127.0.0.1:"+port).toURL(),options);
     }
 
+    public static void longPressAction(AndroidDriver driver,  WebElement element) {
+        driver.executeScript("mobile: longClickGesture", new HashMap<String, Object>() {{
+            put("elementId", element.getAttribute("elementId"));
+            put("duration", 2000);
+        }});
+    }
+
     @AfterClass
     public void tearDown(){
         if(driver!=null){
             driver.quit();
+        }
+        if(service!=null){
+            service.stop();
         }
     }
 }
