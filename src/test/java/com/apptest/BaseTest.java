@@ -6,6 +6,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import org.openqa.selenium.DeviceRotation;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.annotations.AfterMethod;
@@ -38,6 +39,8 @@ public class BaseTest {
         options.setApp(appPath);
 
         driver = new AndroidDriver(new URI("http://127.0.0.1:"+port).toURL(),options);
+//        DeviceRotation landScape = new DeviceRotation(0,0,90);
+//        driver.rotate(landScape);
     }
 
     public static void longPressAction(WebElement element) {

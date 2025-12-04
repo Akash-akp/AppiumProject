@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 public class AppiumBasic extends BaseTest{
     @Test
     public void WifiSettingsTest() {
-        driver.findElement(AppiumBy.accessibilityId("Preference")).click();
-        driver.findElement(AppiumBy.accessibilityId("3. Preference dependencies")).click();
+        getElementByAccessibilityIdWithScroll("Preference").click();
+        getElementByAccessibilityIdWithScroll("3. Preference dependencies").click();
         driver.findElement(By.xpath("//android.widget.ListView[@resource-id='android:id/list']")).click();
         driver.findElement(By.id("android:id/checkbox")).click();
         driver.findElement(By.xpath("(//android.widget.RelativeLayout)[2]")).click();
