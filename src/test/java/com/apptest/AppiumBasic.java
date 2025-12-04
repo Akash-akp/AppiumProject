@@ -35,8 +35,21 @@ public class AppiumBasic extends BaseTest{
         driver.findElement(AppiumBy.accessibilityId("Expandable Lists")).click();
         driver.findElement(AppiumBy.accessibilityId("1. Custom Adapter")).click();
         WebElement peopleNames = driver.findElement(By.xpath("//android.widget.TextView[@text='People Names']"));
-        longPressAction(driver,peopleNames);
+        longPressAction(peopleNames);
         System.out.println(driver.findElement(By.id("android:id/title")).isDisplayed());
     }
 
+    @Test
+    public void ScrollTestByAndroidUIAutomator() {
+        driver.findElement(AppiumBy.accessibilityId("Views")).click();
+        getElementByTextwithScroll("WebView").click();
+    }
+
+    @Test
+    public void ScrollTestByScrollGesture(){
+        driver.findElement(AppiumBy.accessibilityId("Views")).click();
+        getElementByAccessibilityIdWithScroll("WebView").click();
+
+
+    }
 }
