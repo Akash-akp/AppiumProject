@@ -33,7 +33,7 @@ public class BaseTest {
         service.start();
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName("Medium_Phone_API_36.1");
-        options.setUdid("emulator-5556");
+        options.setUdid("emulator-5554");
         String appPath = System.getProperty("user.dir") + "\\src\\test\\resources\\ApiDemos-debug.apk";
         options.setApp(appPath);
 
@@ -76,6 +76,17 @@ public class BaseTest {
                 "percent",percent
         );
         driver.executeScript("mobile: swipeGesture", params);
+    }
+
+    public static void dragAndDrop(WebElement source,WebElement destination){
+        int endX = destination.getLocation().getX() + (destination.getSize().getWidth()/2);
+        int endY = destination.getLocation().getY() + (destination.getSize().getHeight()/2);
+        Map<String, Object> params = ImmutableMap.of(
+                "elementId", ((RemoteWebElement)source).getId(),
+                "endX", endX,
+                "endY", endY
+        );
+        driver.executeScript("mobile: dragGesture", params);
     }
 
     @AfterMethod

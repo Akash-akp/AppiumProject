@@ -55,4 +55,18 @@ public class AppiumBasic extends BaseTest{
         Assert.assertEquals(driver.findElement(By.xpath("//android.widget.ImageView[@index='1']")).getAttribute("focusable"),"true");
 
     }
+
+    @Test
+    public void DragAndDropTest() {
+        driver.findElement(AppiumBy.accessibilityId("Views")).click();
+        driver.findElement(AppiumBy.accessibilityId("Drag and Drop")).click();
+
+        WebElement source = driver.findElement(By.id("io.appium.android.apis:id/drag_dot_1"));
+        WebElement destination = driver.findElement(By.id("io.appium.android.apis:id/drag_dot_2"));
+
+        dragAndDrop(source,destination);
+
+        String resultText = driver.findElement(By.id("io.appium.android.apis:id/drag_result_text")).getText();
+        Assert.assertEquals(resultText,"Dropped!");
+    }
 }
