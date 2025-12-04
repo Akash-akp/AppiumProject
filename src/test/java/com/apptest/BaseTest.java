@@ -69,6 +69,15 @@ public class BaseTest {
         return driver.findElement(AppiumBy.accessibilityId(id));
     }
 
+    public static void swipe(WebElement element,String direction,double percent){
+        Map<String, Object> params = ImmutableMap.of(
+                "elementId", ((RemoteWebElement)element).getId(),
+                "direction",direction,
+                "percent",percent
+        );
+        driver.executeScript("mobile: swipeGesture", params);
+    }
+
     @AfterMethod
     public void tearDown(){
         if(driver!=null){
