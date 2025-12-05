@@ -1,6 +1,8 @@
 package com.apptest;
 
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -8,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class AppiumBasic extends BaseTest{
     @Test
-    public void WifiSettingsTest() {
+    public void wifiSettingsTest() {
         getElementByAccessibilityIdWithScroll("Preference").click();
         getElementByAccessibilityIdWithScroll("3. Preference dependencies").click();
         driver.findElement(By.xpath("//android.widget.ListView[@resource-id='android:id/list']")).click();
@@ -21,7 +23,42 @@ public class AppiumBasic extends BaseTest{
     }
 
     @Test
-    public void LongPressTest() {
+    public void clipBoardTest() {
+        getElementByAccessibilityIdWithScroll("Preference").click();
+        getElementByAccessibilityIdWithScroll("3. Preference dependencies").click();
+        driver.findElement(By.xpath("//android.widget.ListView[@resource-id='android:id/list']")).click();
+        driver.findElement(By.id("android:id/checkbox")).click();
+        driver.findElement(By.xpath("(//android.widget.RelativeLayout)[2]")).click();
+        WebElement textbox = driver.findElement(By.id("android:id/edit"));
+        textbox.clear();
+        driver.setClipboardText("HelloWifi");
+        textbox.sendKeys(driver.getClipboardText());
+        driver.findElement(By.id("android:id/button1")).click();
+    }
+
+    @Test
+    public void keyEventTest() {
+        getElementByAccessibilityIdWithScroll("Preference").click();
+        getElementByAccessibilityIdWithScroll("3. Preference dependencies").click();
+        driver.findElement(By.xpath("//android.widget.ListView[@resource-id='android:id/list']")).click();
+        driver.findElement(By.id("android:id/checkbox")).click();
+        driver.findElement(By.xpath("(//android.widget.RelativeLayout)[2]")).click();
+        WebElement textbox = driver.findElement(By.id("android:id/edit"));
+        textbox.clear();
+        textbox.sendKeys("HelloWifi");
+        driver.pressKey(new KeyEvent(AndroidKey.ENTER));
+        driver.pressKey(new KeyEvent(AndroidKey.ENTER));
+        driver.pressKey(new KeyEvent(AndroidKey.ENTER));
+        driver.findElement(By.id("android:id/button1")).click();
+        driver.pressKey(new KeyEvent(AndroidKey.BACK));
+        driver.pressKey(new KeyEvent(AndroidKey.HOME));
+
+    }
+
+
+
+    @Test
+    public void longPressTest() {
         driver.findElement(AppiumBy.accessibilityId("Views")).click();
         driver.findElement(AppiumBy.accessibilityId("Expandable Lists")).click();
         driver.findElement(AppiumBy.accessibilityId("1. Custom Adapter")).click();
@@ -31,19 +68,19 @@ public class AppiumBasic extends BaseTest{
     }
 
     @Test
-    public void ScrollTestByAndroidUIAutomator() {
+    public void scrollTestByAndroidUIAutomator() {
         driver.findElement(AppiumBy.accessibilityId("Views")).click();
         getElementByTextwithScroll("WebView").click();
     }
 
     @Test
-    public void ScrollTestByScrollGesture(){
+    public void scrollTestByScrollGesture(){
         driver.findElement(AppiumBy.accessibilityId("Views")).click();
         getElementByAccessibilityIdWithScroll("WebView").click();
     }
 
     @Test
-    public void SwipeTest() {
+    public void swipeTest() {
         driver.findElement(AppiumBy.accessibilityId("Views")).click();
         driver.findElement(AppiumBy.accessibilityId("Gallery")).click();
         driver.findElement(AppiumBy.accessibilityId("1. Photos")).click();
@@ -57,7 +94,7 @@ public class AppiumBasic extends BaseTest{
     }
 
     @Test
-    public void DragAndDropTest() {
+    public void dragAndDropTest() {
         driver.findElement(AppiumBy.accessibilityId("Views")).click();
         driver.findElement(AppiumBy.accessibilityId("Drag and Drop")).click();
 
